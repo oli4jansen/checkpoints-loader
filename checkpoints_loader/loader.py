@@ -21,7 +21,7 @@ class CheckpointsLoader():
 
     # Download the checkpoints file if it does not exist yet
     if not path.isfile(filepath):
-      with urllib.request.urlopen(url) as download, open(filename, 'wb') as file:
+      with request.urlopen(url) as download, open(filename, 'wb') as file:
         shutil.copyfileobj(download, file)
 
     # Open the checkpoints file
