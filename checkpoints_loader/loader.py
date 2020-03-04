@@ -1,10 +1,9 @@
-import os
-from urllib import request, urlparse
+from os import makedirs, path
+from urllib import request, parse
 import torch
 import shutil
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
-
 
 class CheckpointsLoader():
 
@@ -12,16 +11,16 @@ class CheckpointsLoader():
     """Initialise the loader with the directory where checkpoints should be stored"""
     self.checkpoints_directory = checkpoints_directory
     # Make sure local checkpoints directory exists
-    os.makedirs(self.checkpoints_directory, exist_ok=True)
+    makedirs(self.checkpoints_directory, exist_ok=True)
 
   def load(self, model, url, strict=True, checkpoints_key=None):
     # Extract filename from URL
-    filename = os.path.basename(urlparse(url).path)
+    filename = path.basename(parse(url).path)
     # Build local path to checkpoints file
-    filepath = os.path.join(self.checkpoints_directory, filename)
+    filepath = path.join(self.checkpoints_directory, filename)
 
     # Download the checkpoints file if it does not exist yet
-    if not os.path.isfile(filepath):
+    if not path.isfile(filepath):
       with urllib.request.urlopen(url) as download, open(filename, 'wb') as file:
         shutil.copyfileobj(download, file)
 
