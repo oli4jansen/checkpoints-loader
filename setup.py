@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="checkpoints_loader",
-    version="0.5",
+    version="0.6",
     author="Olivier Jansen",
     description="Simple checkpoints loader for PyTorch models",
     packages=setuptools.find_packages(),

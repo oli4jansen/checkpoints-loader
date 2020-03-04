@@ -2,6 +2,7 @@ from os import makedirs, path
 from urllib import request, parse
 import torch
 import shutil
+import logging
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
@@ -21,6 +22,7 @@ class CheckpointsLoader():
 
     # Download the checkpoints file if it does not exist yet
     if not path.isfile(filepath):
+      logging.info(f'Downloading pretrained model from {url}')
       with request.urlopen(url) as download, open(filepath, 'wb') as file:
         shutil.copyfileobj(download, file)
 
