@@ -15,7 +15,7 @@ class CheckpointsLoader():
 
   def load(self, model, url, strict=True, checkpoints_key=None):
     # Extract filename from URL
-    filename = path.basename(parse(url).path)
+    filename = path.basename(parse.urlparse(url).path)
     # Build local path to checkpoints file
     filepath = path.join(self.checkpoints_directory, filename)
 
